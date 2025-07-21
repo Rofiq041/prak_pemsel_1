@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddMenuActivity">
+
+    <EditText
+        android:id="@+id/menuId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Id Menu"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/menuName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Nama Menu"
+        android:inputType="text"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/menuPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Harga"
+        android:inputType="number"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"/>
+
+    <ImageView
+        android:id="@+id/imageMenu"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/buttonAddImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Upload Foto"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/buttonSaveMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

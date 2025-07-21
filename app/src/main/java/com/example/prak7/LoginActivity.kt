@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.text.InputType
 import android.widget.ImageView
+import com.example.prak7.DatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mBtnLogin: Button
     private lateinit var mCheckRemember: CheckBox
     private lateinit var mTextRegister: TextView
-    private lateinit var mTogglePassword: ImageView
+    // private lateinit var mTogglePassword: ImageView // Dikomentari karena ID tidak ditemukan di layout
 
     private var isPasswordVisible = false
 
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         initializeViews()
 
         // Setup default user untuk testing (hanya jika belum ada user terdaftar)
-        setupDefaultUserForTesting()
+        // setupDefaultUserForTesting() // Dikomentari karena sudah tidak relevan
 
         // Load remember me data
         loadRememberMeData()
@@ -49,26 +50,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
-        mViewUser = findViewById(R.id.editTextEmail)
-        mViewPassword = findViewById(R.id.editTextPassword)
-        mBtnLogin = findViewById(R.id.buttonLogin)
-        mCheckRemember = findViewById(R.id.checkBoxRemember)
-        mTextRegister = findViewById(R.id.textViewRegister)
-        mTogglePassword = findViewById(R.id.imageViewTogglePassword)
-    }
-
-    private fun setupDefaultUserForTesting() {
-        // Hanya untuk testing - dalam production, hapus ini
-        if (!Preferences.isUserRegistered(this)) {
-            Preferences.registerUser(this, "stevi@amikom.ac.id", "amikomjogja")
-            showToast("User default telah dibuat untuk testing")
-        }
+        mViewUser = findViewById(R.id.usernameInput)
+        mViewPassword = findViewById(R.id.passwordInput)
+        mBtnLogin = findViewById(R.id.loginButton)
+        mCheckRemember = findViewById(R.id.rememberMeCheckbox)
+        mTextRegister = findViewById(R.id.registerText)
+        // mTogglePassword = findViewById(R.id.imageViewTogglePassword) // Dikomentari karena ID tidak ditemukan di layout
     }
 
     private fun loadRememberMeData() {
         // Jika remember me aktif, isi field username
         if (Preferences.getRememberMe(this)) {
-            mViewUser.setText(Preferences.getRegisteredUser(this) ?: "")
+            mViewUser.setText(Preferences.getLoggedInUser(this) ?: "") // Menggunakan getLoggedInUser
             mCheckRemember.isChecked = true
         }
     }
@@ -85,9 +78,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Event listener untuk toggle password visibility
-        mTogglePassword.setOnClickListener {
-            togglePasswordVisibility()
-        }
+        // mTogglePassword.setOnClickListener { // Dikomentari karena ID tidak ditemukan di layout
+        //     togglePasswordVisibility()
+        // }
 
         // Event listener untuk remember me checkbox
         mCheckRemember.setOnCheckedChangeListener { _, isChecked ->
@@ -104,18 +97,14 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Cek apakah user terdaftar
-        if (!Preferences.isUserRegistered(this)) {
-            showToast("Belum ada user yang terdaftar. Silakan register terlebih dahulu.")
-            return
-        }
-
-        // Proses login menggunakan fungsi yang sudah ada di Preferences
-        val loginSuccess = Preferences.loginUser(this, username, password)
+        val databaseHelper = DatabaseHelper(this)
+        val loginSuccess = databaseHelper.loginUser(username, password)
 
         if (loginSuccess) {
             // Simpan remember me preference
             Preferences.setRememberMe(this, mCheckRemember.isChecked)
+            Preferences.setLoggedInUser(this, username)
+            Preferences.setLoggedInStatus(this, true)
 
             showToast("Login berhasil!")
             navigateToMainActivity()
@@ -162,11 +151,11 @@ class LoginActivity : AppCompatActivity() {
         if (isPasswordVisible) {
             // Hide password
             mViewPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            mTogglePassword.setImageResource(android.R.drawable.ic_partial_secure)
+            // mTogglePassword.setImageResource(android.R.drawable.ic_partial_secure) // Dikomentari karena ID tidak ditemukan di layout
         } else {
             // Show password
             mViewPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            mTogglePassword.setImageResource(android.R.drawable.ic_secure)
+            // mTogglePassword.setImageResource(android.R.drawable.ic_secure) // Dikomentari karena ID tidak ditemukan di layout
         }
 
         // Move cursor to end
