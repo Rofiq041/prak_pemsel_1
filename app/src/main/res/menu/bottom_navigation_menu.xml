@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_makanan"
+        android:icon="@drawable/ic_makanan"
+        android:title="Makanan" />
+    <item
+        android:id="@+id/nav_transaksi"
+        android:icon="@drawable/ic_transaksi"
+        android:title="Transaksi" />
+    <item
+        android:id="@+id/nav_api"
+        android:icon="@drawable/ic_api"
+        android:title="API" />
+</menu>

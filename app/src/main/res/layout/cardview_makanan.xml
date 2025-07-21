@@ -51,6 +51,12 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/buttonTambah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

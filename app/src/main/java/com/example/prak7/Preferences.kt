@@ -69,6 +69,13 @@ object Preferences {
         editor.apply()
     }
 
+    fun clearLoggedInUser(context: Context) {
+        val editor = getSharedPreference(context).edit()
+        editor.remove(KEY_USERNAME_LOGGED_IN)
+        editor.remove(KEY_STATUS_LOGGED_IN)
+        editor.apply()
+    }
+
     fun clearAllData(context: Context) {
         val editor = getSharedPreference(context).edit()
         editor.clear()

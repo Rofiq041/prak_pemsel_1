@@ -47,6 +47,15 @@
             android:background="@drawable/edit_text_background"
             android:padding="12dp"/>
 
+        <ImageView
+            android:id="@+id/imageViewTogglePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="-40dp"
+            android:layout_marginEnd="10dp"
+            android:src="@android:drawable/ic_menu_view" />
+
         <CheckBox
             android:id="@+id/rememberMeCheckbox"
             android:layout_width="wrap_content"

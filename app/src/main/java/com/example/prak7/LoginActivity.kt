@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mBtnLogin: Button
     private lateinit var mCheckRemember: CheckBox
     private lateinit var mTextRegister: TextView
-    // private lateinit var mTogglePassword: ImageView // Dikomentari karena ID tidak ditemukan di layout
+    private lateinit var mTogglePassword: ImageView
 
     private var isPasswordVisible = false
 
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         mBtnLogin = findViewById(R.id.loginButton)
         mCheckRemember = findViewById(R.id.rememberMeCheckbox)
         mTextRegister = findViewById(R.id.registerText)
-        // mTogglePassword = findViewById(R.id.imageViewTogglePassword) // Dikomentari karena ID tidak ditemukan di layout
+        mTogglePassword = findViewById(R.id.imageViewTogglePassword)
     }
 
     private fun loadRememberMeData() {
@@ -78,9 +78,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Event listener untuk toggle password visibility
-        // mTogglePassword.setOnClickListener { // Dikomentari karena ID tidak ditemukan di layout
-        //     togglePasswordVisibility()
-        // }
+        mTogglePassword.setOnClickListener {
+            togglePasswordVisibility()
+        }
 
         // Event listener untuk remember me checkbox
         mCheckRemember.setOnCheckedChangeListener { _, isChecked ->
@@ -151,11 +151,11 @@ class LoginActivity : AppCompatActivity() {
         if (isPasswordVisible) {
             // Hide password
             mViewPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            // mTogglePassword.setImageResource(android.R.drawable.ic_partial_secure) // Dikomentari karena ID tidak ditemukan di layout
+            mTogglePassword.setImageResource(android.R.drawable.ic_menu_view)
         } else {
             // Show password
             mViewPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            // mTogglePassword.setImageResource(android.R.drawable.ic_secure) // Dikomentari karena ID tidak ditemukan di layout
+            mTogglePassword.setImageResource(android.R.drawable.ic_menu_view)
         }
 
         // Move cursor to end
