@@ -1,25 +1,26 @@
 package com.example.prak7
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.prak7.DatabaseHelper
 
 class AddMenuActivity : AppCompatActivity() {
 
     private lateinit var image: ImageView
 
-    companion object {
-        const val IMAGE_REQUEST_CODE = 100
+    private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data: Intent? = result.data
+            data?.data?.let {
+                image.setImageURI(it)
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,9 @@ class AddMenuActivity : AppCompatActivity() {
         val btnSaveMenu: Button = findViewById(R.id.buttonSaveMenu)
 
         btnAddImage.setOnClickListener {
-            pickImageGallery()
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            pickImage.launch(intent)
         }
 
         btnSaveMenu.setOnClickListener {
@@ -54,19 +57,6 @@ class AddMenuActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun pickImageGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            image.setImageURI(data?.data)
         }
     }
 }

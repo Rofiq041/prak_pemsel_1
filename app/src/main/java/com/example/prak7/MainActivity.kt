@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val welcomeText: TextView = findViewById(R.id.welcomeText)
         val loggedInUser = Preferences.getLoggedInUser(applicationContext)
-        welcomeText.text = "Selamat Datang! $loggedInUser"
+        welcomeText.text = "Selamat Datang! $loggedInUser (22.83.0769)"
 
         val logoutButton: Button = findViewById(R.id.logoutButton)
         logoutButton.setOnClickListener {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             var selectedFragment: Fragment? = null
             when (item.itemId) {
                 R.id.nav_makanan -> selectedFragment = FragmentMakanan()
